@@ -168,10 +168,18 @@ function revealAll(){
 
 function toggleMastered(e, id){
   e.stopPropagation();
-  if(masteredSet.has(id)) masteredSet.delete(id);
+  const isDone = masteredSet.has(id);
+  if(isDone) masteredSet.delete(id);
   else masteredSet.add(id);
   save();
-  document.getElementById('item-'+id).classList.toggle('done', masteredSet.has(id));
+  
+  const card = document.getElementById('item-'+id);
+  const btn = card.querySelector('.done-btn');
+  const nowDone = masteredSet.has(id);
+  
+  card.classList.toggle('done', nowDone);
+  btn.classList.toggle('active', nowDone);
+  btn.innerHTML = `<i class="bi ${nowDone?'bi-check-circle-fill':'bi-circle'}"></i> ${nowDone?'Mastered':'Mark as Mastered'}`;
 }
 
 function revealBlock(el){
