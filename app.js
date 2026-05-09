@@ -12,16 +12,16 @@ function buildNumpad(id,pinId,displayId){
 }
 function showRegister(){document.getElementById('loginPanel').classList.add('d-none');document.getElementById('registerPanel').classList.remove('d-none');}
 function showLogin(){document.getElementById('registerPanel').classList.add('d-none');document.getElementById('loginPanel').classList.remove('d-none');}
-function getPin(displayId){return Array.from(document.getElementById(displayId).querySelectorAll('span')).map(s=>s.textContent).filter(t=>t.length>0).join('');}
+function getPin(pinId){return document.getElementById(pinId).textContent||'';}
 async function doRegister(){
-  const name=document.getElementById('regName').value.trim(),start=document.getElementById('regStartDate').value,pin=getPin('regPinDisplay'),errEl=document.getElementById('regError');
+  const name=document.getElementById('regName').value.trim(),start=document.getElementById('regStartDate').value,pin=getPin('regPinValue'),errEl=document.getElementById('regError');
   if(!name||!start||pin.length<6){errEl.textContent='Fill all fields.';errEl.classList.remove('d-none');return;}
   showLoading('Creating...');const user={name,pin,startDate:start,created:Date.now()};
   try{if(db){const s=await db.collection('ielts_users').where('pin','==',pin).get();if(!s.empty){hideLoading();errEl.textContent='PIN taken.';errEl.classList.remove('d-none');return;}await db.collection('ielts_users').add(user);}}catch(e){}
   localStorage.setItem('ielts_user',JSON.stringify(user));hideLoading();loginUser(user);
 }
 async function doLogin(){
-  const pin=getPin('loginPinDisplay');if(pin.length<6)return;showLoading('Verifying...');
+  const pin=getPin('loginPinValue');if(pin.length<6)return;showLoading('Verifying...');
   let user=null;const loc=localStorage.getItem('ielts_user');
   if(loc){const u=JSON.parse(loc);if(u.pin===pin)user=u;}
   if(!user&&db){try{const s=await db.collection('ielts_users').where('pin','==',pin).get();if(!s.empty){user=s.docs[0].data();localStorage.setItem('ielts_user',JSON.stringify(user));}}catch(e){}}
