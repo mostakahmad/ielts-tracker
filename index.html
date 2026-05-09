@@ -1,33 +1,40 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IELTS Mentor – Your 45-Day Band 7+ Journey</title>
-  <meta name="description" content="Personal IELTS mentor and tracker for your 45-day Band 7+ journey. Daily tasks, progress tracking, error logs, and study resources."/>
-  
+  <meta name="description"
+    content="Personal IELTS mentor and tracker for your 45-day Band 7+ journey. Daily tasks, progress tracking, error logs, and study resources." />
+
   <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://mostakahmad.github.io/ielts-tracker/"/>
-  <meta property="og:title" content="IELTS Mentor – Your 45-Day Band 7+ Journey"/>
-  <meta property="og:description" content="Master the IELTS with a structured 45-day routine, personal error logs, and active recall vocabulary tools."/>
-  <meta property="og:image" content="ielts_mentor_og_banner_1778313956139.png"/>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mostakahmad.github.io/ielts-tracker/" />
+  <meta property="og:title" content="IELTS Mentor – Your 45-Day Band 7+ Journey" />
+  <meta property="og:description"
+    content="Master the IELTS with a structured 45-day routine, personal error logs, and active recall vocabulary tools." />
+  <meta property="og:image"
+    content="https://mostakahmad.github.io/ielts-tracker/ielts_mentor_og_banner_1778313956139.png" />
 
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:url" content="https://mostakahmad.github.io/ielts-tracker/"/>
-  <meta property="twitter:title" content="IELTS Mentor – Your 45-Day Band 7+ Journey"/>
-  <meta property="twitter:description" content="Master the IELTS with a structured 45-day routine, personal error logs, and active recall vocabulary tools."/>
-  <meta property="twitter:image" content="ielts_mentor_og_banner_1778313956139.png"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://mostakahmad.github.io/ielts-tracker/" />
+  <meta property="twitter:title" content="IELTS Mentor – Your 45-Day Band 7+ Journey" />
+  <meta property="twitter:description"
+    content="Master the IELTS with a structured 45-day routine, personal error logs, and active recall vocabulary tools." />
+  <meta property="twitter:image"
+    content="https://mostakahmad.github.io/ielts-tracker/ielts_mentor_og_banner_1778313956139.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="firebase-config.js"></script>
-  <link rel="stylesheet" href="style.css?v=1.1"/>
+  <link rel="stylesheet" href="style.css?v=1.1" />
   <script>
-    window.handlePin = function(k, pinId, displayId) {
+    window.handlePin = function (k, pinId, displayId) {
       const el = document.getElementById(pinId);
       if (!el) return;
       let v = el.textContent || '';
@@ -48,542 +55,601 @@
     };
   </script>
 </head>
+
 <body>
 
-<!-- AUTH SCREEN -->
-<div id="authScreen" class="screen active">
-  <div class="auth-bg">
-    <div class="auth-card">
-      <div class="brand mb-4">
-        <div class="brand-icon"><i class="bi bi-mortarboard-fill"></i></div>
-        <h1 class="brand-name">IELTS Mentor</h1>
-        <p class="brand-tagline">Your 45-Day Band 7+ Personal Guide</p>
-      </div>
-      <div id="loginPanel">
-        <h5 class="panel-title">Welcome Back</h5>
-        <p class="panel-sub">Enter your PIN to continue your journey</p>
-        <div class="pin-display mb-3" id="loginPinDisplay">
-          <span></span><span></span><span></span><span></span><span></span><span></span>
+  <!-- AUTH SCREEN -->
+  <div id="authScreen" class="screen active">
+    <div class="auth-bg">
+      <div class="auth-card">
+        <div class="brand mb-4">
+          <div class="brand-icon"><i class="bi bi-mortarboard-fill"></i></div>
+          <h1 class="brand-name">IELTS Mentor</h1>
+          <p class="brand-tagline">Your 45-Day Band 7+ Personal Guide</p>
         </div>
-        <div id="loginPinValue" class="d-none"></div>
-        <div class="numpad" id="loginNumpad">
-          <button type="button" onclick="window.handlePin(1,'loginPinValue','loginPinDisplay')">1</button>
-          <button type="button" onclick="window.handlePin(2,'loginPinValue','loginPinDisplay')">2</button>
-          <button type="button" onclick="window.handlePin(3,'loginPinValue','loginPinDisplay')">3</button>
-          <button type="button" onclick="window.handlePin(4,'loginPinValue','loginPinDisplay')">4</button>
-          <button type="button" onclick="window.handlePin(5,'loginPinValue','loginPinDisplay')">5</button>
-          <button type="button" onclick="window.handlePin(6,'loginPinValue','loginPinDisplay')">6</button>
-          <button type="button" onclick="window.handlePin(7,'loginPinValue','loginPinDisplay')">7</button>
-          <button type="button" onclick="window.handlePin(8,'loginPinValue','loginPinDisplay')">8</button>
-          <button type="button" onclick="window.handlePin(9,'loginPinValue','loginPinDisplay')">9</button>
-          <button type="button" disabled></button>
-          <button type="button" onclick="window.handlePin(0,'loginPinValue','loginPinDisplay')">0</button>
-          <button type="button" class="del" onclick="window.handlePin('del','loginPinValue','loginPinDisplay')">X</button>
-        </div>
-        <div id="loginError" class="auth-error d-none"><i class="bi bi-exclamation-circle"></i> Invalid PIN. Try again.</div>
-        <p class="switch-link mt-4">New here? <button type="button" class="btn btn-link p-0 text-decoration-none fw-bold" onclick="window.showRegister()" style="color:var(--accent)">Create Account</button></p>
-      </div>
-      <div id="registerPanel" class="d-none">
-        <h5 class="panel-title">Start Your Journey</h5>
-        <p class="panel-sub">Set up your IELTS study profile</p>
-        <div class="mb-3">
-          <label class="form-label-custom">Your Name</label>
-          <input type="text" id="regName" class="input-custom" placeholder="e.g. Ahmed" maxlength="20"/>
-        </div>
-        <div class="mb-3">
-          <label class="form-label-custom">Journey Start Date</label>
-          <input type="date" id="regStartDate" class="input-custom"/>
-        </div>
-        <div class="mb-3">
-          <label class="form-label-custom">Choose 6-Digit PIN</label>
-          <div class="pin-display small-pin mb-2" id="regPinDisplay">
+        <div id="loginPanel">
+          <h5 class="panel-title">Welcome Back</h5>
+          <p class="panel-sub">Enter your PIN to continue your journey</p>
+          <div class="pin-display mb-3" id="loginPinDisplay">
             <span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
-          <div id="regPinValue" class="d-none"></div>
-          <div class="numpad" id="regNumpad">
-            <button type="button" onclick="window.handlePin(1,'regPinValue','regPinDisplay')">1</button>
-            <button type="button" onclick="window.handlePin(2,'regPinValue','regPinDisplay')">2</button>
-            <button type="button" onclick="window.handlePin(3,'regPinValue','regPinDisplay')">3</button>
-            <button type="button" onclick="window.handlePin(4,'regPinValue','regPinDisplay')">4</button>
-            <button type="button" onclick="window.handlePin(5,'regPinValue','regPinDisplay')">5</button>
-            <button type="button" onclick="window.handlePin(6,'regPinValue','regPinDisplay')">6</button>
-            <button type="button" onclick="window.handlePin(7,'regPinValue','regPinDisplay')">7</button>
-            <button type="button" onclick="window.handlePin(8,'regPinValue','regPinDisplay')">8</button>
-            <button type="button" onclick="window.handlePin(9,'regPinValue','regPinDisplay')">9</button>
+          <div id="loginPinValue" class="d-none"></div>
+          <div class="numpad" id="loginNumpad">
+            <button type="button" onclick="window.handlePin(1,'loginPinValue','loginPinDisplay')">1</button>
+            <button type="button" onclick="window.handlePin(2,'loginPinValue','loginPinDisplay')">2</button>
+            <button type="button" onclick="window.handlePin(3,'loginPinValue','loginPinDisplay')">3</button>
+            <button type="button" onclick="window.handlePin(4,'loginPinValue','loginPinDisplay')">4</button>
+            <button type="button" onclick="window.handlePin(5,'loginPinValue','loginPinDisplay')">5</button>
+            <button type="button" onclick="window.handlePin(6,'loginPinValue','loginPinDisplay')">6</button>
+            <button type="button" onclick="window.handlePin(7,'loginPinValue','loginPinDisplay')">7</button>
+            <button type="button" onclick="window.handlePin(8,'loginPinValue','loginPinDisplay')">8</button>
+            <button type="button" onclick="window.handlePin(9,'loginPinValue','loginPinDisplay')">9</button>
             <button type="button" disabled></button>
-            <button type="button" onclick="window.handlePin(0,'regPinValue','regPinDisplay')">0</button>
-            <button type="button" class="del" onclick="window.handlePin('del','regPinValue','regPinDisplay')">X</button>
+            <button type="button" onclick="window.handlePin(0,'loginPinValue','loginPinDisplay')">0</button>
+            <button type="button" class="del"
+              onclick="window.handlePin('del','loginPinValue','loginPinDisplay')">X</button>
           </div>
+          <div id="loginError" class="auth-error d-none"><i class="bi bi-exclamation-circle"></i> Invalid PIN. Try
+            again.</div>
+          <p class="switch-link mt-4">New here? <button type="button"
+              class="btn btn-link p-0 text-decoration-none fw-bold" onclick="window.showRegister()"
+              style="color:var(--accent)">Create Account</button></p>
         </div>
-        <div id="regError" class="auth-error d-none"></div>
-        <button class="btn-primary-custom w-100 mt-3" id="regBtn" onclick="doRegister()">
-          <i class="bi bi-rocket-takeoff"></i> Begin Journey
-        </button>
-        <p class="switch-link mt-3">Already have an account? <a href="#" onclick="showLogin()">Log In</a></p>
+        <div id="registerPanel" class="d-none">
+          <h5 class="panel-title">Start Your Journey</h5>
+          <p class="panel-sub">Set up your IELTS study profile</p>
+          <div class="mb-3">
+            <label class="form-label-custom">Your Name</label>
+            <input type="text" id="regName" class="input-custom" placeholder="e.g. Ahmed" maxlength="20" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label-custom">Journey Start Date</label>
+            <input type="date" id="regStartDate" class="input-custom" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label-custom">Choose 6-Digit PIN</label>
+            <div class="pin-display small-pin mb-2" id="regPinDisplay">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div id="regPinValue" class="d-none"></div>
+            <div class="numpad" id="regNumpad">
+              <button type="button" onclick="window.handlePin(1,'regPinValue','regPinDisplay')">1</button>
+              <button type="button" onclick="window.handlePin(2,'regPinValue','regPinDisplay')">2</button>
+              <button type="button" onclick="window.handlePin(3,'regPinValue','regPinDisplay')">3</button>
+              <button type="button" onclick="window.handlePin(4,'regPinValue','regPinDisplay')">4</button>
+              <button type="button" onclick="window.handlePin(5,'regPinValue','regPinDisplay')">5</button>
+              <button type="button" onclick="window.handlePin(6,'regPinValue','regPinDisplay')">6</button>
+              <button type="button" onclick="window.handlePin(7,'regPinValue','regPinDisplay')">7</button>
+              <button type="button" onclick="window.handlePin(8,'regPinValue','regPinDisplay')">8</button>
+              <button type="button" onclick="window.handlePin(9,'regPinValue','regPinDisplay')">9</button>
+              <button type="button" disabled></button>
+              <button type="button" onclick="window.handlePin(0,'regPinValue','regPinDisplay')">0</button>
+              <button type="button" class="del"
+                onclick="window.handlePin('del','regPinValue','regPinDisplay')">X</button>
+            </div>
+          </div>
+          <div id="regError" class="auth-error d-none"></div>
+          <button class="btn-primary-custom w-100 mt-3" id="regBtn" onclick="doRegister()">
+            <i class="bi bi-rocket-takeoff"></i> Begin Journey
+          </button>
+          <p class="switch-link mt-3">Already have an account? <a href="#" onclick="showLogin()">Log In</a></p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- APP SCREEN -->
-<div id="appScreen" class="screen">
+  <!-- APP SCREEN -->
+  <div id="appScreen" class="screen">
 
-  <!-- Sidebar -->
-  <nav class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="brand-icon sm"><i class="bi bi-mortarboard-fill"></i></div>
-      <span class="sidebar-brand">IELTS Mentor</span>
-      <button class="sidebar-close d-lg-none" onclick="toggleSidebar()"><i class="bi bi-x-lg"></i></button>
-    </div>
-    <div class="sidebar-user">
-      <div class="user-avatar" id="sidebarAvatar"></div>
-      <div>
-        <div class="user-name" id="sidebarName"></div>
-        <div class="user-pin" id="journeyDay"></div>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon sm"><i class="bi bi-mortarboard-fill"></i></div>
+        <span class="sidebar-brand">IELTS Mentor</span>
+        <button class="sidebar-close d-lg-none" onclick="toggleSidebar()"><i class="bi bi-x-lg"></i></button>
       </div>
+      <div class="sidebar-user">
+        <div class="user-avatar" id="sidebarAvatar"></div>
+        <div>
+          <div class="user-name" id="sidebarName"></div>
+          <div class="user-pin" id="journeyDay"></div>
+        </div>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="#" class="nav-item active" onclick="showPage('dashboard',this)" id="nav-dashboard">
+            <i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li><a href="#" class="nav-item" onclick="showPage('today',this)" id="nav-today">
+            <i class="bi bi-calendar-check"></i> Today's Plan</a></li>
+        <li><a href="#" class="nav-item" onclick="showPage('checklist',this)" id="nav-checklist">
+            <i class="bi bi-check2-square"></i> Daily Checklist</a></li>
+        <li><a href="#" class="nav-item" onclick="showPage('progress',this)" id="nav-progress">
+            <i class="bi bi-graph-up-arrow"></i> My Progress</a></li>
+        <li><a href="#" class="nav-item" onclick="showPage('errorlog',this)" id="nav-errorlog">
+            <i class="bi bi-journal-x"></i> Error Log</a></li>
+        <li><a href="#" class="nav-item" onclick="showPage('vocab',this)" id="nav-vocab">
+            <i class="bi bi-alphabet"></i> Vocabulary</a></li>
+        <li><a href="#" class="nav-item" onclick="showPage('routine',this)" id="nav-routine">
+            <i class="bi bi-calendar3"></i> 45-Day Routine</a></li>
+        <li><a href="#" class="nav-item" onclick="showPage('resources',this)" id="nav-resources">
+            <i class="bi bi-book-half"></i> Resources</a></li>
+        <li><a href="#" class="nav-item" onclick="showPage('mentor',this)" id="nav-mentor">
+            <i class="bi bi-chat-heart"></i> Mentor Tips</a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <a href="#" class="nav-item logout" onclick="doLogout()"><i class="bi bi-box-arrow-left"></i> Logout</a>
+      </div>
+
+      <div style='padding:14px 14px 10px;border-top:1px solid var(--border)'>
+        <a href='vocab-bank.html'
+          style='display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(0,217,255,.08));border:1px solid rgba(99,102,241,.25);border-radius:10px;text-decoration:none;color:var(--text);font-size:.78rem;font-weight:600;transition:.2s;margin-bottom:8px'>
+          <i class='bi bi-collection-fill' style='color:#6c63ff;font-size:1rem'></i>
+          <div>
+            <div>Master Vocab Bank</div>
+            <div style='font-size:.65rem;color:var(--text3)'>1230 words &bull; E2B</div>
+          </div>
+          <i class='bi bi-box-arrow-up-right' style='margin-left:auto;color:var(--text3);font-size:.75rem'></i>
+        </a>
+        <a href='practice-vocab.html'
+          style='display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(135deg,rgba(0,217,255,.12),rgba(16,185,129,.08));border:1px solid rgba(0,217,255,.25);border-radius:10px;text-decoration:none;color:var(--text);font-size:.78rem;font-weight:600;transition:.2s'>
+          <i class='bi bi-lightning-charge-fill' style='color:#00d9ff;font-size:1rem'></i>
+          <div>
+            <div>Sentence Practice</div>
+            <div style='font-size:.65rem;color:var(--text3)'>1270+ Collocations</div>
+          </div>
+          <i class='bi bi-box-arrow-up-right' style='margin-left:auto;color:var(--text3);font-size:.75rem'></i>
+        </a>
+      </div>
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+      <!-- Topbar -->
+      <div class="topbar">
+        <button class="topbar-menu d-lg-none" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+        <div class="topbar-title" id="topbarTitle">Dashboard</div>
+        <div class="topbar-right">
+          <span class="day-badge" id="topDayBadge"></span>
+          <div class="topbar-date" id="topbarDate"></div>
+        </div>
+      </div>
+
+      <!-- ===== DASHBOARD PAGE ===== -->
+      <div id="pageDashboard" class="page active">
+        <div class="page-content">
+          <!-- Mentor Message -->
+          <div class="mentor-banner" id="mentorBanner">
+            <div class="mentor-avatar"><i class="bi bi-robot"></i></div>
+            <div class="mentor-text">
+              <div class="mentor-greeting" id="mentorGreeting">Good morning!</div>
+              <div class="mentor-msg" id="mentorMsg">Loading your personalized guidance...</div>
+            </div>
+          </div>
+
+          <!-- Journey Stats -->
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)"><i
+                  class="bi bi-calendar-heart"></i></div>
+              <div class="stat-info">
+                <div class="stat-value" id="statDay">1</div>
+                <div class="stat-label">Current Day</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4)"><i
+                  class="bi bi-check2-all"></i></div>
+              <div class="stat-info">
+                <div class="stat-value" id="statChecked">0/10</div>
+                <div class="stat-label">Today Done</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background:linear-gradient(135deg,#10b981,#059669)"><i
+                  class="bi bi-fire"></i></div>
+              <div class="stat-info">
+                <div class="stat-value" id="statStreak">0</div>
+                <div class="stat-label">Day Streak</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444)"><i
+                  class="bi bi-percent"></i></div>
+              <div class="stat-info">
+                <div class="stat-value" id="statOverall">0%</div>
+                <div class="stat-label">Journey Done</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Today's Focus -->
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-crosshair"></i> Today's Focus</h6>
+              <span class="badge-week" id="dashWeekBadge"></span>
+            </div>
+            <div id="todayFocusQuick"></div>
+          </div>
+
+          <!-- Progress Bars -->
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-bar-chart-steps"></i> Skill Progress</h6>
+            </div>
+            <div id="skillProgressBars"></div>
+          </div>
+
+          <!-- Upcoming Mocks -->
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-clipboard2-pulse"></i> Mock Test Schedule</h6>
+            </div>
+            <div id="mockScheduleList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TODAY'S PLAN PAGE ===== -->
+      <div id="pageToday" class="page">
+        <div class="page-content">
+          <div class="day-selector-wrap">
+            <button class="day-nav-btn" onclick="changePlanDay(-1)"><i class="bi bi-chevron-left"></i></button>
+            <div class="day-selector-label" id="planDayLabel">Day 1</div>
+            <button class="day-nav-btn" onclick="changePlanDay(1)"><i class="bi bi-chevron-right"></i></button>
+          </div>
+          <div id="todayPlanContent"></div>
+        </div>
+      </div>
+
+      <!-- ===== DAILY CHECKLIST PAGE ===== -->
+      <div id="pageChecklist" class="page">
+        <div class="page-content">
+          <div class="day-selector-wrap mb-3">
+            <button class="day-nav-btn" onclick="changeChecklistDay(-1)"><i class="bi bi-chevron-left"></i></button>
+            <div class="day-selector-label" id="checklistDate">Day 1</div>
+            <button class="day-nav-btn" onclick="changeChecklistDay(1)"><i class="bi bi-chevron-right"></i></button>
+          </div>
+          <div class="section-card">
+            <div class="section-header d-flex align-items-center justify-content-between">
+              <h6 class="section-title mb-0"><i class="bi bi-check2-square"></i> Daily Checklist</h6>
+            </div>
+            <p class="checklist-sub">Complete all 10 tasks every day to build your Band 7 habit.</p>
+            <div id="checklistItems"></div>
+            <div class="checklist-progress-wrap mt-3">
+              <div class="d-flex justify-content-between mb-1">
+                <span class="goal-prog-label">Today's Completion</span>
+                <span class="goal-prog-pct" id="checklistPct">0%</span>
+              </div>
+              <div class="goal-bar-bg">
+                <div class="goal-bar-fill" id="checklistBar" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Score Entry -->
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-123"></i> Today's Scores</h6>
+            </div>
+            <div class="score-grid">
+              <div class="score-input-wrap">
+                <label>Listening <span class="score-max">/40</span></label>
+                <input type="number" id="scoreListening" class="input-custom score-in" min="0" max="40"
+                  placeholder="–" />
+              </div>
+              <div class="score-input-wrap">
+                <label>Reading <span class="score-max">/40</span></label>
+                <input type="number" id="scoreReading" class="input-custom score-in" min="0" max="40" placeholder="–" />
+              </div>
+              <div class="score-input-wrap">
+                <label>Writing T1 <span class="score-max">/9</span></label>
+                <input type="number" id="scoreWriting1" class="input-custom score-in" min="0" max="9" step="0.5"
+                  placeholder="–" />
+              </div>
+              <div class="score-input-wrap">
+                <label>Writing T2 <span class="score-max">/9</span></label>
+                <input type="number" id="scoreWriting2" class="input-custom score-in" min="0" max="9" step="0.5"
+                  placeholder="–" />
+              </div>
+              <div class="score-input-wrap">
+                <label>Speaking <span class="score-max">/9</span></label>
+                <input type="number" id="scoreSpeaking" class="input-custom score-in" min="0" max="9" step="0.5"
+                  placeholder="–" />
+              </div>
+            </div>
+            <div class="mt-3">
+              <label class="form-label-custom">Notes / Reflections</label>
+              <textarea id="dayNotes" class="input-custom" rows="3"
+                placeholder="How did today go? What was hard? What clicked?"></textarea>
+            </div>
+            <button class="btn-primary-custom mt-3" onclick="saveDayData()"><i class="bi bi-cloud-arrow-up"></i> Save
+              Today's Data</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PROGRESS PAGE ===== -->
+      <div id="pageProgress" class="page">
+        <div class="page-content">
+          <!-- Weekly Scores Table -->
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-table"></i> Weekly Score Tracker</h6>
+            </div>
+            <div class="table-responsive">
+              <table class="progress-table w-100" id="weeklyScoreTable">
+                <thead>
+                  <tr>
+                    <th>Week</th>
+                    <th>Phase</th>
+                    <th>Listen</th>
+                    <th>Read</th>
+                    <th>Write</th>
+                    <th>Speak</th>
+                    <th>Streak</th>
+                  </tr>
+                </thead>
+                <tbody id="weeklyScoreBody"></tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Band Estimate -->
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-award"></i> Estimated Band Score</h6>
+            </div>
+            <div id="bandEstimate"></div>
+          </div>
+          <!-- Daily Heatmap -->
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-grid-3x3"></i> 45-Day Journey Heatmap</h6>
+            </div>
+            <div class="heatmap-wrap" id="journeyHeatmap"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ERROR LOG PAGE ===== -->
+      <div id="pageErrorlog" class="page">
+        <div class="page-content">
+          <div class="section-card">
+            <div class="section-header d-flex align-items-center justify-content-between">
+              <h6 class="section-title mb-0"><i class="bi bi-journal-x"></i> Error Log</h6>
+              <button class="btn-add-sm" onclick="openErrorModal()"><i class="bi bi-plus-circle"></i> Add Error</button>
+            </div>
+            <p class="checklist-sub">Track your mistakes → identify patterns → fix them within 48 hours.</p>
+            <div class="error-filter-row">
+              <select id="errorSkillFilter" class="input-custom py-1" onchange="renderErrors()">
+                <option value="">All Skills</option>
+                <option>Listening</option>
+                <option>Reading</option>
+                <option>Writing</option>
+                <option>Speaking</option>
+                <option>Vocabulary</option>
+                <option>Grammar</option>
+              </select>
+              <select id="errorRepeatFilter" class="input-custom py-1" onchange="renderErrors()">
+                <option value="">All</option>
+                <option value="yes">Repeated</option>
+                <option value="no">Fixed</option>
+              </select>
+            </div>
+            <div id="errorList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error Modal -->
+      <div class="modal-overlay d-none" id="errorModal">
+        <div class="modal-box">
+          <div class="modal-header-custom">
+            <h6><i class="bi bi-journal-plus"></i> Add Error Entry</h6>
+            <button onclick="closeErrorModal()"><i class="bi bi-x-lg"></i></button>
+          </div>
+          <div class="modal-body-custom">
+            <div class="mb-2">
+              <label class="form-label-custom">Skill</label>
+              <select id="errSkill" class="input-custom">
+                <option>Listening</option>
+                <option>Reading</option>
+                <option>Writing</option>
+                <option>Speaking</option>
+                <option>Vocabulary</option>
+                <option>Grammar</option>
+              </select>
+            </div>
+            <div class="mb-2">
+              <label class="form-label-custom">Mistake</label>
+              <input type="text" id="errMistake" class="input-custom" placeholder="e.g. wrote 15 instead of 50" />
+            </div>
+            <div class="mb-2">
+              <label class="form-label-custom">Reason</label>
+              <input type="text" id="errReason" class="input-custom" placeholder="e.g. number confusion" />
+            </div>
+            <div class="mb-2">
+              <label class="form-label-custom">Correction / Fix</label>
+              <input type="text" id="errFix" class="input-custom" placeholder="e.g. practice number drills" />
+            </div>
+            <div class="mb-2">
+              <label class="form-label-custom">Repeated?</label>
+              <select id="errRepeat" class="input-custom">
+                <option value="yes">Yes – still happening</option>
+                <option value="no">No – fixed now</option>
+              </select>
+            </div>
+            <button class="btn-primary-custom w-100 mt-2" onclick="saveError()"><i class="bi bi-save"></i> Save
+              Entry</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== VOCABULARY PAGE ===== -->
+      <div id="pageVocab" class="page">
+        <div class="page-content">
+          <div class="section-card">
+            <div class="section-header d-flex align-items-center justify-content-between">
+              <h6 class="section-title mb-0"><i class="bi bi-alphabet"></i> Vocabulary Notebook</h6>
+              <button class="btn-add-sm" onclick="openVocabModal()"><i class="bi bi-plus-circle"></i> Add Word</button>
+            </div>
+            <p class="checklist-sub">Learn 15 words/day • 5 collocations • Topic rotation every 5 days</p>
+            <div class="vocab-topic-badge" id="vocabTopicBadge"></div>
+            <div class="error-filter-row">
+              <input type="text" id="vocabSearch" class="input-custom py-1" placeholder="Search words..."
+                oninput="renderVocab()" />
+              <select id="vocabTopicFilter" class="input-custom py-1" onchange="renderVocab()">
+                <option value="">All Topics</option>
+                <option>Education</option>
+                <option>Work and career</option>
+                <option>Health</option>
+                <option>Technology</option>
+                <option>Environment</option>
+                <option>Society and culture</option>
+                <option>Transport and cities</option>
+                <option>Globalization and media</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div id="vocabList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vocab Modal -->
+      <div class="modal-overlay d-none" id="vocabModal">
+        <div class="modal-box">
+          <div class="modal-header-custom">
+            <h6><i class="bi bi-plus-circle"></i> Add Vocabulary</h6>
+            <button onclick="closeVocabModal()"><i class="bi bi-x-lg"></i></button>
+          </div>
+          <div class="modal-body-custom">
+            <div class="mb-2">
+              <label class="form-label-custom">Word / Phrase</label>
+              <input type="text" id="vocabWord" class="input-custom" placeholder="e.g. sustainable development" />
+            </div>
+            <div class="mb-2">
+              <label class="form-label-custom">Meaning (English)</label>
+              <input type="text" id="vocabMeaning" class="input-custom" placeholder="e.g. able to continue long-term" />
+            </div>
+            <div class="mb-2">
+              <label class="form-label-custom">Meaning (Bangla)</label>
+              <input type="text" id="vocabMeaningBn" class="input-custom"
+                placeholder="e.g. দীর্ঘমেয়াদী চালিয়ে যেতে সক্ষম" />
+            </div>
+            <div class="mb-2">
+              <label class="form-label-custom">Collocation</label>
+              <input type="text" id="vocabCollocation" class="input-custom"
+                placeholder="e.g. sustainable development" />
+            </div>
+            <div class="mb-2">
+              <label class="form-label-custom">Example Sentence</label>
+              <input type="text" id="vocabExample" class="input-custom"
+                placeholder="e.g. Governments should support sustainable development." />
+            </div>
+            <div class="mb-2">
+              <label class="form-label-custom">Topic</label>
+              <select id="vocabTopicInput" class="input-custom">
+                <option>Education</option>
+                <option>Work and career</option>
+                <option>Health</option>
+                <option>Technology</option>
+                <option>Environment</option>
+                <option>Society and culture</option>
+                <option>Transport and cities</option>
+                <option>Globalization and media</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button class="btn-primary-custom w-100 mt-2" onclick="saveVocab()"><i class="bi bi-save"></i> Save
+              Word</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 45-DAY ROUTINE PAGE ===== -->
+      <div id="pageRoutine" class="page">
+        <div class="page-content">
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-calendar3"></i> 45-Day Study Routine</h6>
+            </div>
+            <div class="week-tabs" id="weekTabs">
+              <button class="week-tab active" onclick="showWeek(1,this)">Week 1</button>
+              <button class="week-tab" onclick="showWeek(2,this)">Week 2</button>
+              <button class="week-tab" onclick="showWeek(3,this)">Week 3</button>
+              <button class="week-tab" onclick="showWeek(4,this)">Week 4</button>
+              <button class="week-tab" onclick="showWeek(5,this)">Week 5</button>
+              <button class="week-tab" onclick="showWeek(6,this)">Week 6</button>
+            </div>
+            <div id="routineContent"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RESOURCES PAGE ===== -->
+      <div id="pageResources" class="page">
+        <div class="page-content">
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-book-half"></i> Study Resources</h6>
+            </div>
+            <div class="resource-tabs">
+              <button class="res-tab active" onclick="showResTab('free',this)"><i class="bi bi-gift"></i> Free</button>
+              <button class="res-tab" onclick="showResTab('paid',this)"><i class="bi bi-cart3"></i> Paid</button>
+              <button class="res-tab" onclick="showResTab('strategy',this)"><i class="bi bi-lightbulb"></i>
+                Strategies</button>
+            </div>
+            <div id="resourceContent"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== MENTOR TIPS PAGE ===== -->
+      <div id="pageMentor" class="page">
+        <div class="page-content">
+          <div class="mentor-banner big">
+            <div class="mentor-avatar large"><i class="bi bi-robot"></i></div>
+            <div class="mentor-text">
+              <div class="mentor-greeting">Your Personal IELTS Mentor</div>
+              <div class="mentor-msg" id="mentorPageMsg">Analysing your journey...</div>
+            </div>
+          </div>
+          <div id="mentorAdviceCards"></div>
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-exclamation-triangle"></i> Common Mistakes to Avoid</h6>
+            </div>
+            <div id="mistakesList"></div>
+          </div>
+          <div class="section-card">
+            <div class="section-header">
+              <h6 class="section-title"><i class="bi bi-arrow-up-circle"></i> Band 6 → Band 7 Upgrade</h6>
+            </div>
+            <div id="upgradeList"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end main-content -->
+  </div><!-- end appScreen -->
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay d-none">
+    <div class="loading-box">
+      <div class="loading-spinner"></div>
+      <div class="loading-msg" id="loadingMsg">Please wait…</div>
     </div>
-    <ul class="sidebar-nav">
-      <li><a href="#" class="nav-item active" onclick="showPage('dashboard',this)" id="nav-dashboard">
-        <i class="bi bi-speedometer2"></i> Dashboard</a></li>
-      <li><a href="#" class="nav-item" onclick="showPage('today',this)" id="nav-today">
-        <i class="bi bi-calendar-check"></i> Today's Plan</a></li>
-      <li><a href="#" class="nav-item" onclick="showPage('checklist',this)" id="nav-checklist">
-        <i class="bi bi-check2-square"></i> Daily Checklist</a></li>
-      <li><a href="#" class="nav-item" onclick="showPage('progress',this)" id="nav-progress">
-        <i class="bi bi-graph-up-arrow"></i> My Progress</a></li>
-      <li><a href="#" class="nav-item" onclick="showPage('errorlog',this)" id="nav-errorlog">
-        <i class="bi bi-journal-x"></i> Error Log</a></li>
-      <li><a href="#" class="nav-item" onclick="showPage('vocab',this)" id="nav-vocab">
-        <i class="bi bi-alphabet"></i> Vocabulary</a></li>
-      <li><a href="#" class="nav-item" onclick="showPage('routine',this)" id="nav-routine">
-        <i class="bi bi-calendar3"></i> 45-Day Routine</a></li>
-      <li><a href="#" class="nav-item" onclick="showPage('resources',this)" id="nav-resources">
-        <i class="bi bi-book-half"></i> Resources</a></li>
-      <li><a href="#" class="nav-item" onclick="showPage('mentor',this)" id="nav-mentor">
-        <i class="bi bi-chat-heart"></i> Mentor Tips</a></li>
-    </ul>
-    <div class="sidebar-footer">
-      <a href="#" class="nav-item logout" onclick="doLogout()"><i class="bi bi-box-arrow-left"></i> Logout</a>
-    </div>
-  
-  <div style='padding:14px 14px 10px;border-top:1px solid var(--border)'>
-    <a href='vocab-bank.html' style='display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(0,217,255,.08));border:1px solid rgba(99,102,241,.25);border-radius:10px;text-decoration:none;color:var(--text);font-size:.78rem;font-weight:600;transition:.2s;margin-bottom:8px'>
-      <i class='bi bi-collection-fill' style='color:#6c63ff;font-size:1rem'></i>
-      <div><div>Master Vocab Bank</div><div style='font-size:.65rem;color:var(--text3)'>1230 words &bull; E2B</div></div>
-      <i class='bi bi-box-arrow-up-right' style='margin-left:auto;color:var(--text3);font-size:.75rem'></i>
-    </a>
-    <a href='practice-vocab.html' style='display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(135deg,rgba(0,217,255,.12),rgba(16,185,129,.08));border:1px solid rgba(0,217,255,.25);border-radius:10px;text-decoration:none;color:var(--text);font-size:.78rem;font-weight:600;transition:.2s'>
-      <i class='bi bi-lightning-charge-fill' style='color:#00d9ff;font-size:1rem'></i>
-      <div><div>Sentence Practice</div><div style='font-size:.65rem;color:var(--text3)'>1270+ Collocations</div></div>
-      <i class='bi bi-box-arrow-up-right' style='margin-left:auto;color:var(--text3);font-size:.75rem'></i>
-    </a>
   </div>
-  </nav>
-  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-  <!-- Main Content -->
-  <div class="main-content" id="mainContent">
-    <!-- Topbar -->
-    <div class="topbar">
-      <button class="topbar-menu d-lg-none" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
-      <div class="topbar-title" id="topbarTitle">Dashboard</div>
-      <div class="topbar-right">
-        <span class="day-badge" id="topDayBadge"></span>
-        <div class="topbar-date" id="topbarDate"></div>
-      </div>
+  <!-- Toast -->
+  <div class="toast-wrap" id="toastWrap">
+    <div class="toast-box" id="toastBox">
+      <i class="bi bi-check-circle-fill"></i> <span id="toastMsg"></span>
     </div>
-
-    <!-- ===== DASHBOARD PAGE ===== -->
-    <div id="pageDashboard" class="page active">
-      <div class="page-content">
-        <!-- Mentor Message -->
-        <div class="mentor-banner" id="mentorBanner">
-          <div class="mentor-avatar"><i class="bi bi-robot"></i></div>
-          <div class="mentor-text">
-            <div class="mentor-greeting" id="mentorGreeting">Good morning!</div>
-            <div class="mentor-msg" id="mentorMsg">Loading your personalized guidance...</div>
-          </div>
-        </div>
-
-        <!-- Journey Stats -->
-        <div class="stats-row">
-          <div class="stat-card">
-            <div class="stat-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)"><i class="bi bi-calendar-heart"></i></div>
-            <div class="stat-info">
-              <div class="stat-value" id="statDay">1</div>
-              <div class="stat-label">Current Day</div>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4)"><i class="bi bi-check2-all"></i></div>
-            <div class="stat-info">
-              <div class="stat-value" id="statChecked">0/10</div>
-              <div class="stat-label">Today Done</div>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:linear-gradient(135deg,#10b981,#059669)"><i class="bi bi-fire"></i></div>
-            <div class="stat-info">
-              <div class="stat-value" id="statStreak">0</div>
-              <div class="stat-label">Day Streak</div>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444)"><i class="bi bi-percent"></i></div>
-            <div class="stat-info">
-              <div class="stat-value" id="statOverall">0%</div>
-              <div class="stat-label">Journey Done</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Today's Focus -->
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-crosshair"></i> Today's Focus</h6>
-            <span class="badge-week" id="dashWeekBadge"></span>
-          </div>
-          <div id="todayFocusQuick"></div>
-        </div>
-
-        <!-- Progress Bars -->
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-bar-chart-steps"></i> Skill Progress</h6>
-          </div>
-          <div id="skillProgressBars"></div>
-        </div>
-
-        <!-- Upcoming Mocks -->
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-clipboard2-pulse"></i> Mock Test Schedule</h6>
-          </div>
-          <div id="mockScheduleList"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== TODAY'S PLAN PAGE ===== -->
-    <div id="pageToday" class="page">
-      <div class="page-content">
-        <div class="day-selector-wrap">
-          <button class="day-nav-btn" onclick="changePlanDay(-1)"><i class="bi bi-chevron-left"></i></button>
-          <div class="day-selector-label" id="planDayLabel">Day 1</div>
-          <button class="day-nav-btn" onclick="changePlanDay(1)"><i class="bi bi-chevron-right"></i></button>
-        </div>
-        <div id="todayPlanContent"></div>
-      </div>
-    </div>
-
-    <!-- ===== DAILY CHECKLIST PAGE ===== -->
-    <div id="pageChecklist" class="page">
-      <div class="page-content">
-        <div class="day-selector-wrap mb-3">
-          <button class="day-nav-btn" onclick="changeChecklistDay(-1)"><i class="bi bi-chevron-left"></i></button>
-          <div class="day-selector-label" id="checklistDate">Day 1</div>
-          <button class="day-nav-btn" onclick="changeChecklistDay(1)"><i class="bi bi-chevron-right"></i></button>
-        </div>
-        <div class="section-card">
-          <div class="section-header d-flex align-items-center justify-content-between">
-            <h6 class="section-title mb-0"><i class="bi bi-check2-square"></i> Daily Checklist</h6>
-          </div>
-          <p class="checklist-sub">Complete all 10 tasks every day to build your Band 7 habit.</p>
-          <div id="checklistItems"></div>
-          <div class="checklist-progress-wrap mt-3">
-            <div class="d-flex justify-content-between mb-1">
-              <span class="goal-prog-label">Today's Completion</span>
-              <span class="goal-prog-pct" id="checklistPct">0%</span>
-            </div>
-            <div class="goal-bar-bg"><div class="goal-bar-fill" id="checklistBar" style="width:0%"></div></div>
-          </div>
-        </div>
-        <!-- Score Entry -->
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-123"></i> Today's Scores</h6>
-          </div>
-          <div class="score-grid">
-            <div class="score-input-wrap">
-              <label>Listening <span class="score-max">/40</span></label>
-              <input type="number" id="scoreListening" class="input-custom score-in" min="0" max="40" placeholder="–"/>
-            </div>
-            <div class="score-input-wrap">
-              <label>Reading <span class="score-max">/40</span></label>
-              <input type="number" id="scoreReading" class="input-custom score-in" min="0" max="40" placeholder="–"/>
-            </div>
-            <div class="score-input-wrap">
-              <label>Writing T1 <span class="score-max">/9</span></label>
-              <input type="number" id="scoreWriting1" class="input-custom score-in" min="0" max="9" step="0.5" placeholder="–"/>
-            </div>
-            <div class="score-input-wrap">
-              <label>Writing T2 <span class="score-max">/9</span></label>
-              <input type="number" id="scoreWriting2" class="input-custom score-in" min="0" max="9" step="0.5" placeholder="–"/>
-            </div>
-            <div class="score-input-wrap">
-              <label>Speaking <span class="score-max">/9</span></label>
-              <input type="number" id="scoreSpeaking" class="input-custom score-in" min="0" max="9" step="0.5" placeholder="–"/>
-            </div>
-          </div>
-          <div class="mt-3">
-            <label class="form-label-custom">Notes / Reflections</label>
-            <textarea id="dayNotes" class="input-custom" rows="3" placeholder="How did today go? What was hard? What clicked?"></textarea>
-          </div>
-          <button class="btn-primary-custom mt-3" onclick="saveDayData()"><i class="bi bi-cloud-arrow-up"></i> Save Today's Data</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== PROGRESS PAGE ===== -->
-    <div id="pageProgress" class="page">
-      <div class="page-content">
-        <!-- Weekly Scores Table -->
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-table"></i> Weekly Score Tracker</h6>
-          </div>
-          <div class="table-responsive">
-            <table class="progress-table w-100" id="weeklyScoreTable">
-              <thead>
-                <tr>
-                  <th>Week</th><th>Phase</th><th>Listen</th><th>Read</th><th>Write</th><th>Speak</th><th>Streak</th>
-                </tr>
-              </thead>
-              <tbody id="weeklyScoreBody"></tbody>
-            </table>
-          </div>
-        </div>
-        <!-- Band Estimate -->
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-award"></i> Estimated Band Score</h6>
-          </div>
-          <div id="bandEstimate"></div>
-        </div>
-        <!-- Daily Heatmap -->
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-grid-3x3"></i> 45-Day Journey Heatmap</h6>
-          </div>
-          <div class="heatmap-wrap" id="journeyHeatmap"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== ERROR LOG PAGE ===== -->
-    <div id="pageErrorlog" class="page">
-      <div class="page-content">
-        <div class="section-card">
-          <div class="section-header d-flex align-items-center justify-content-between">
-            <h6 class="section-title mb-0"><i class="bi bi-journal-x"></i> Error Log</h6>
-            <button class="btn-add-sm" onclick="openErrorModal()"><i class="bi bi-plus-circle"></i> Add Error</button>
-          </div>
-          <p class="checklist-sub">Track your mistakes → identify patterns → fix them within 48 hours.</p>
-          <div class="error-filter-row">
-            <select id="errorSkillFilter" class="input-custom py-1" onchange="renderErrors()">
-              <option value="">All Skills</option>
-              <option>Listening</option><option>Reading</option>
-              <option>Writing</option><option>Speaking</option><option>Vocabulary</option><option>Grammar</option>
-            </select>
-            <select id="errorRepeatFilter" class="input-custom py-1" onchange="renderErrors()">
-              <option value="">All</option>
-              <option value="yes">Repeated</option>
-              <option value="no">Fixed</option>
-            </select>
-          </div>
-          <div id="errorList"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Error Modal -->
-    <div class="modal-overlay d-none" id="errorModal">
-      <div class="modal-box">
-        <div class="modal-header-custom">
-          <h6><i class="bi bi-journal-plus"></i> Add Error Entry</h6>
-          <button onclick="closeErrorModal()"><i class="bi bi-x-lg"></i></button>
-        </div>
-        <div class="modal-body-custom">
-          <div class="mb-2">
-            <label class="form-label-custom">Skill</label>
-            <select id="errSkill" class="input-custom">
-              <option>Listening</option><option>Reading</option>
-              <option>Writing</option><option>Speaking</option><option>Vocabulary</option><option>Grammar</option>
-            </select>
-          </div>
-          <div class="mb-2">
-            <label class="form-label-custom">Mistake</label>
-            <input type="text" id="errMistake" class="input-custom" placeholder="e.g. wrote 15 instead of 50"/>
-          </div>
-          <div class="mb-2">
-            <label class="form-label-custom">Reason</label>
-            <input type="text" id="errReason" class="input-custom" placeholder="e.g. number confusion"/>
-          </div>
-          <div class="mb-2">
-            <label class="form-label-custom">Correction / Fix</label>
-            <input type="text" id="errFix" class="input-custom" placeholder="e.g. practice number drills"/>
-          </div>
-          <div class="mb-2">
-            <label class="form-label-custom">Repeated?</label>
-            <select id="errRepeat" class="input-custom">
-              <option value="yes">Yes – still happening</option>
-              <option value="no">No – fixed now</option>
-            </select>
-          </div>
-          <button class="btn-primary-custom w-100 mt-2" onclick="saveError()"><i class="bi bi-save"></i> Save Entry</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== VOCABULARY PAGE ===== -->
-    <div id="pageVocab" class="page">
-      <div class="page-content">
-        <div class="section-card">
-          <div class="section-header d-flex align-items-center justify-content-between">
-            <h6 class="section-title mb-0"><i class="bi bi-alphabet"></i> Vocabulary Notebook</h6>
-            <button class="btn-add-sm" onclick="openVocabModal()"><i class="bi bi-plus-circle"></i> Add Word</button>
-          </div>
-          <p class="checklist-sub">Learn 15 words/day • 5 collocations • Topic rotation every 5 days</p>
-          <div class="vocab-topic-badge" id="vocabTopicBadge"></div>
-          <div class="error-filter-row">
-            <input type="text" id="vocabSearch" class="input-custom py-1" placeholder="Search words..." oninput="renderVocab()"/>
-            <select id="vocabTopicFilter" class="input-custom py-1" onchange="renderVocab()">
-              <option value="">All Topics</option>
-              <option>Education</option><option>Work and career</option><option>Health</option>
-              <option>Technology</option><option>Environment</option><option>Society and culture</option>
-              <option>Transport and cities</option><option>Globalization and media</option><option>Other</option>
-            </select>
-          </div>
-          <div id="vocabList"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Vocab Modal -->
-    <div class="modal-overlay d-none" id="vocabModal">
-      <div class="modal-box">
-        <div class="modal-header-custom">
-          <h6><i class="bi bi-plus-circle"></i> Add Vocabulary</h6>
-          <button onclick="closeVocabModal()"><i class="bi bi-x-lg"></i></button>
-        </div>
-        <div class="modal-body-custom">
-          <div class="mb-2">
-            <label class="form-label-custom">Word / Phrase</label>
-            <input type="text" id="vocabWord" class="input-custom" placeholder="e.g. sustainable development"/>
-          </div>
-          <div class="mb-2">
-            <label class="form-label-custom">Meaning (English)</label>
-            <input type="text" id="vocabMeaning" class="input-custom" placeholder="e.g. able to continue long-term"/>
-          </div>
-          <div class="mb-2">
-            <label class="form-label-custom">Meaning (Bangla)</label>
-            <input type="text" id="vocabMeaningBn" class="input-custom" placeholder="e.g. দীর্ঘমেয়াদী চালিয়ে যেতে সক্ষম"/>
-          </div>
-          <div class="mb-2">
-            <label class="form-label-custom">Collocation</label>
-            <input type="text" id="vocabCollocation" class="input-custom" placeholder="e.g. sustainable development"/>
-          </div>
-          <div class="mb-2">
-            <label class="form-label-custom">Example Sentence</label>
-            <input type="text" id="vocabExample" class="input-custom" placeholder="e.g. Governments should support sustainable development."/>
-          </div>
-          <div class="mb-2">
-            <label class="form-label-custom">Topic</label>
-            <select id="vocabTopicInput" class="input-custom">
-              <option>Education</option><option>Work and career</option><option>Health</option>
-              <option>Technology</option><option>Environment</option><option>Society and culture</option>
-              <option>Transport and cities</option><option>Globalization and media</option><option>Other</option>
-            </select>
-          </div>
-          <button class="btn-primary-custom w-100 mt-2" onclick="saveVocab()"><i class="bi bi-save"></i> Save Word</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== 45-DAY ROUTINE PAGE ===== -->
-    <div id="pageRoutine" class="page">
-      <div class="page-content">
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-calendar3"></i> 45-Day Study Routine</h6>
-          </div>
-          <div class="week-tabs" id="weekTabs">
-            <button class="week-tab active" onclick="showWeek(1,this)">Week 1</button>
-            <button class="week-tab" onclick="showWeek(2,this)">Week 2</button>
-            <button class="week-tab" onclick="showWeek(3,this)">Week 3</button>
-            <button class="week-tab" onclick="showWeek(4,this)">Week 4</button>
-            <button class="week-tab" onclick="showWeek(5,this)">Week 5</button>
-            <button class="week-tab" onclick="showWeek(6,this)">Week 6</button>
-          </div>
-          <div id="routineContent"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== RESOURCES PAGE ===== -->
-    <div id="pageResources" class="page">
-      <div class="page-content">
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-book-half"></i> Study Resources</h6>
-          </div>
-          <div class="resource-tabs">
-            <button class="res-tab active" onclick="showResTab('free',this)"><i class="bi bi-gift"></i> Free</button>
-            <button class="res-tab" onclick="showResTab('paid',this)"><i class="bi bi-cart3"></i> Paid</button>
-            <button class="res-tab" onclick="showResTab('strategy',this)"><i class="bi bi-lightbulb"></i> Strategies</button>
-          </div>
-          <div id="resourceContent"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== MENTOR TIPS PAGE ===== -->
-    <div id="pageMentor" class="page">
-      <div class="page-content">
-        <div class="mentor-banner big">
-          <div class="mentor-avatar large"><i class="bi bi-robot"></i></div>
-          <div class="mentor-text">
-            <div class="mentor-greeting">Your Personal IELTS Mentor</div>
-            <div class="mentor-msg" id="mentorPageMsg">Analysing your journey...</div>
-          </div>
-        </div>
-        <div id="mentorAdviceCards"></div>
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-exclamation-triangle"></i> Common Mistakes to Avoid</h6>
-          </div>
-          <div id="mistakesList"></div>
-        </div>
-        <div class="section-card">
-          <div class="section-header">
-            <h6 class="section-title"><i class="bi bi-arrow-up-circle"></i> Band 6 → Band 7 Upgrade</h6>
-          </div>
-          <div id="upgradeList"></div>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- end main-content -->
-</div><!-- end appScreen -->
-
-<!-- Loading Overlay -->
-<div id="loadingOverlay" class="loading-overlay d-none">
-  <div class="loading-box">
-    <div class="loading-spinner"></div>
-    <div class="loading-msg" id="loadingMsg">Please wait…</div>
   </div>
-</div>
 
-<!-- Toast -->
-<div class="toast-wrap" id="toastWrap">
-  <div class="toast-box" id="toastBox">
-    <i class="bi bi-check-circle-fill"></i> <span id="toastMsg"></span>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="app_data.js?v=1.1"></script><script src="app.js?v=1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app_data.js?v=1.1"></script>
+  <script src="app.js?v=1.1"></script>
 </body>
+
 </html>
-
-
