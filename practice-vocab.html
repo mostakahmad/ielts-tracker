@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IELTS Vocab Practice — Sentence & Meaning</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#080911;--card:#11131f;--card2:#181b2d;--border:#222640;
+  --accent:#6c63ff;--accent2:#00d9ff;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--pink:#ec4899;
+  --text:#e8eaf6;--text2:#a0a8c9;--text3:#5a6080;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* HEADER */
+.header{background:rgba(13,14,28,0.8);backdrop-filter:blur(20px);padding:16px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000;}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:15px;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;}
+.logo-text h1{font-size:1.1rem;font-weight:800;color:#fff;}
+.logo-text p{font-size:.7rem;color:var(--text3);}
+
+/* STATS */
+.top-stats{display:flex;gap:12px;}
+.stat-box{background:var(--card2);border:1px solid var(--border);padding:6px 14px;border-radius:30px;font-size:.75rem;display:flex;align-items:center;gap:6px;}
+.stat-box strong{color:var(--accent2);}
+
+/* CONTROLS */
+.controls-bar{max-width:1200px;margin:20px auto;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.filter-select{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:10px 15px;border-radius:12px;font-size:.85rem;outline:none;cursor:pointer;flex:1;min-width:200px;}
+.ctrl-btn{background:var(--card2);border:1px solid var(--border);color:var(--text2);padding:10px 18px;border-radius:12px;font-size:.85rem;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.2s;}
+.ctrl-btn:hover{border-color:var(--accent);color:#fff;}
+.ctrl-btn.active{background:rgba(108,99,255,0.15);border-color:var(--accent);color:var(--accent);}
+
+/* PRACTICE LIST */
+.practice-container{max-width:1200px;margin:0 auto 40px;padding:0 20px;}
+.practice-item{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:15px;transition:.3s;position:relative;overflow:hidden;cursor:pointer;}
+.practice-item:hover{border-color:rgba(108,99,255,0.4);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,0.4);}
+.practice-item.done{border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.02);}
+
+.item-num{position:absolute;top:20px;right:25px;font-size:.75rem;font-weight:800;color:var(--text3);font-family:monospace;}
+.item-section{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);margin-bottom:10px;font-weight:700;}
+.item-eng{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:18px;line-height:1.2;}
+
+.hidden-block{background:rgba(255,255,255,0.03);border:1px dashed var(--border);border-radius:12px;padding:15px;margin-top:12px;transition:.2s;}
+.hidden-block.revealed{background:rgba(108,99,255,0.05);border:1px solid rgba(108,99,255,0.2);border-style:solid;}
+
+.label-hint{font-size:.65rem;color:var(--text3);text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
+.revealed .label-hint{color:var(--accent2);}
+
+.val-bn{font-size:1.1rem;font-weight:600;color:var(--text2);display:none;}
+.revealed .val-bn{display:block;color:var(--text);}
+
+.val-sent{font-size:.95rem;font-style:italic;color:var(--text3);line-height:1.6;display:none;}
+.revealed .val-sent{display:block;color:var(--text2);}
+
+.click-prompt{font-size:.75rem;color:var(--accent);display:block;margin-top:5px;font-weight:600;}
+.revealed .click-prompt{display:none;}
+
+.item-actions{margin-top:20px;display:flex;gap:10px;padding-top:15px;border-top:1px solid rgba(255,255,255,0.05);}
+.action-btn{background:none;border:1px solid var(--border);color:var(--text3);padding:6px 12px;border-radius:8px;font-size:.7rem;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.2s;}
+.action-btn:hover{color:var(--text);border-color:var(--text3);}
+.action-btn.done-btn.active{background:var(--green);border-color:var(--green);color:#fff;}
+
+/* SEARCH */
+.search-input{width:100%;background:var(--card2);border:1px solid var(--border);color:var(--text);padding:12px 20px;border-radius:15px;margin-bottom:20px;outline:none;font-size:.9rem;}
+.search-input:focus{border-color:var(--accent);}
+
+/* FLOATING ACTIONS */
+.fab{position:fixed;bottom:30px;right:30px;width:60px;height:60px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 10px 20px rgba(108,99,255,0.3);cursor:pointer;transition:.3s;z-index:100;}
+.fab:hover{transform:scale(1.1) rotate(90deg);background:var(--accent2);}
+
+@media(max-width:768px){
+  .header-inner{flex-direction:column;text-align:center;}
+  .top-stats{width:100%;justify-content:center;}
+  .item-eng{font-size:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+      <div class="logo-text">
+        <h1>Vocab Master Practice</h1>
+        <p>1,270+ Collocations & Sentences</p>
+      </div>
+    </a>
+    <div class="top-stats">
+      <div class="stat-box"><i class="bi bi-check-all"></i> <strong id="statMastered">0</strong> Mastered</div>
+      <div class="stat-box"><i class="bi bi-trophy"></i> <strong id="statPct">0%</strong> Goal</div>
+    </div>
+  </div>
+</header>
+
+<div class="controls-bar">
+  <select class="filter-select" id="sectionFilter" onchange="applyFilters()">
+    <option value="all">All Sections</option>
+  </select>
+  <button class="ctrl-btn" id="shuffleBtn" onclick="shuffleData()"><i class="bi bi-shuffle"></i> Shuffle</button>
+  <button class="ctrl-btn" onclick="revealAll()"><i class="bi bi-eye"></i> Reveal All</button>
+  <button class="ctrl-btn" onclick="resetProgress()"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+</div>
+
+<div class="practice-container">
+  <input type="text" class="search-input" id="searchInput" placeholder="Quick search collocations..." oninput="applyFilters()"/>
+  <div id="practiceList"></div>
+</div>
+
+<div class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <i class="bi bi-arrow-up"></i>
+</div>
+
+<script src="vocab_sent_bank.js"></script>
+<script>
+let masteredSet = new Set(JSON.parse(localStorage.getItem('vocab_practice_done') || '[]'));
+let displayList = [...VOCAB_SENT_BANK];
+let showAll = false;
+
+function save(){ localStorage.setItem('vocab_practice_done', JSON.stringify([...masteredSet])); updateStats(); }
+
+function init(){
+  const sections = [...new Set(VOCAB_SENT_BANK.map(i => i.section))];
+  const select = document.getElementById('sectionFilter');
+  sections.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s; opt.textContent = s;
+    select.appendChild(opt);
+  });
+  updateStats();
+  applyFilters();
+}
+
+function updateStats(){
+  const total = VOCAB_SENT_BANK.length;
+  const done = masteredSet.size;
+  document.getElementById('statMastered').textContent = done;
+  document.getElementById('statPct').textContent = Math.round((done/total)*100) + '%';
+}
+
+function applyFilters(){
+  const sec = document.getElementById('sectionFilter').value;
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  
+  displayList = VOCAB_SENT_BANK.filter(item => {
+    const matchSec = sec === 'all' || item.section === sec;
+    const matchQ = item.eng.toLowerCase().includes(q) || item.bn.toLowerCase().includes(q);
+    return matchSec && matchQ;
+  });
+  
+  render();
+}
+
+function shuffleData(){
+  displayList.sort(() => Math.random() - 0.5);
+  render();
+}
+
+function revealAll(){
+  showAll = !showAll;
+  render();
+}
+
+function toggleMastered(e, id){
+  e.stopPropagation();
+  if(masteredSet.has(id)) masteredSet.delete(id);
+  else masteredSet.add(id);
+  save();
+  document.getElementById('item-'+id).classList.toggle('done', masteredSet.has(id));
+}
+
+function revealBlock(el){
+  el.classList.toggle('revealed');
+}
+
+function resetProgress(){
+  if(confirm('Clear all mastered items?')) {
+    masteredSet.clear(); save(); render();
+  }
+}
+
+function render(){
+  const container = document.getElementById('practiceList');
+  if(displayList.length === 0){
+    container.innerHTML = '<div style="text-align:center;padding:50px;color:var(--text3)"><i class="bi bi-search" style="font-size:3rem"></i><p>No matches found.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = displayList.map(item => {
+    const isDone = masteredSet.has(item.id);
+    const revCls = showAll ? 'revealed' : '';
+    return `
+      <div class="practice-item ${isDone?'done':''}" id="item-${item.id}" data-id="${item.id}">
+        <div class="item-num">#${item.id}</div>
+        <div class="item-section">${item.section}</div>
+        <div class="item-eng">${item.eng}</div>
+        
+        <div class="hidden-block ${revCls}" onclick="revealBlock(this)">
+          <div class="label-hint"><i class="bi bi-translate"></i> Bangla Meaning</div>
+          <div class="val-bn">${item.bn}</div>
+          <span class="click-prompt">Click to reveal meaning</span>
+        </div>
+        
+        <div class="hidden-block ${revCls}" onclick="revealBlock(this)">
+          <div class="label-hint"><i class="bi bi-chat-quote"></i> Example Sentence / Category</div>
+          <div class="val-sent">${item.extra}</div>
+          <span class="click-prompt">Click to reveal sentence</span>
+        </div>
+        
+        <div class="item-actions">
+          <button class="action-btn done-btn ${isDone?'active':''}" onclick="toggleMastered(event, ${item.id})">
+            <i class="bi ${isDone?'bi-check-circle-fill':'bi-circle'}"></i> 
+            ${isDone?'Mastered':'Mark as Mastered'}
+          </button>
+          <div style="flex:1"></div>
+          <div style="font-size:.65rem;color:var(--text3)">Ref: ${item.section.split(':')[0]}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+init();
+</script>
+</body>
+</html>
