@@ -76,7 +76,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .word-section{font-size:.62rem;color:var(--text3);margin-top:5px;display:flex;align-items:center;gap:4px;}
 .word-done-icon{position:absolute;top:10px;right:10px;width:22px;height:22px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;opacity:0;transition:.2s;}
 .word-card.done .word-done-icon{opacity:1;}
-.word-card.done .word-text{color:var(--text2);}
+.word-card.done .word-text{color:var(--text2);opacity:.7;}
+.word-eye{position:absolute;top:10px;right:40px;width:24px;height:24px;color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:.2s;border-radius:50%;}
+.word-eye:hover{background:rgba(255,255,255,.1);color:var(--text);}
+.word-card.show-meanings .word-eye{color:var(--accent2);}
 
 /* LIST VIEW CARD */
 .vocab-grid.list-view .word-card{display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:10px;}
@@ -183,7 +186,15 @@ function save(){localStorage.setItem('vocab_done', JSON.stringify([...doneSet]))
 function toggleAllMeanings(){
   showMeanings = !showMeanings;
   document.getElementById('bnToggleLabel').textContent = showMeanings ? 'Hide Bangla' : 'Show Bangla';
-  document.querySelectorAll('.word-card').forEach(c => c.classList.toggle('show-meanings', showMeanings));
+  document.querySelectorAll('.word-card').forEach(c => {
+    if(showMeanings) c.classList.add('show-meanings');
+    else c.classList.remove('show-meanings');
+  });
+}
+function toggleSingleMeaning(e, id){
+  e.stopPropagation();
+  const card = document.querySelector(`[data-id="${id}"]`);
+  if(card) card.classList.toggle('show-meanings');
 }
 function setFilter(f, el){
   currentFilter = f;
@@ -300,9 +311,10 @@ function render(){
     const color = COLORS[w.letter] || '#6c63ff';
     return `<div class="word-card ${done?'done':''} ${showMeanings?'show-meanings':''}" data-id="${w.id}" onclick="toggleWord(${w.id})" style="--sec-color:${color}">
       <div class="word-num">#${w.id}</div>
-      <div class="word-text">${w.word}</div>
+      <div class="word-text" onclick="toggleSingleMeaning(event, ${w.id})">${w.word}</div>
       <div class="word-bn">${w.bn || ''}</div>
       ${!isList ? `<div class="word-section badge-${w.letter}"><i class="bi bi-bookmark-fill" style="font-size:.55rem"></i> ${w.letter}</div>` : ''}
+      <div class="word-eye" onclick="toggleSingleMeaning(event, ${w.id})"><i class="bi bi-eye"></i></div>
       <div class="word-done-icon"><i class="bi bi-check-lg"></i></div>
     </div>`;
   }).join('');
