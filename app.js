@@ -1,5 +1,5 @@
 // ===== STATE =====
-let currentUser=null,db=null,planDay=1,currentResTab='free',currentWeek=1,errorEntries=[],vocabEntries=[];
+let currentUser=null,db=null,planDay=1,checklistDay=1,currentResTab='free',currentWeek=1,errorEntries=[],vocabEntries=[];
 try{
   if(typeof firebase === 'undefined') throw new Error("Firebase library not loaded. Check your internet connection.");
   firebase.initializeApp(firebaseConfig);
@@ -67,6 +67,7 @@ window.loginUser = function(u){
 function doLogout(){currentUser=null;localStorage.removeItem('ielts_user');document.getElementById('appScreen').classList.remove('active');document.getElementById('authScreen').classList.add('active');}
 function getCurrentDay(){if(!currentUser?.startDate)return 1;const diff=Math.floor((new Date()-new Date(currentUser.startDate))/(864e5))+1;return Math.max(1,Math.min(45,diff));}
 function getWeekForDay(d){return Math.ceil(d/7);}
+function getDateForDay(d){if(!currentUser?.startDate)return new Date().toDateString();const dt=new Date(currentUser.startDate);dt.setDate(dt.getDate()+(d-1));return dt.toDateString();}
 
 function getCurrentTopic(){const d=getCurrentDay();for(let i=0;i<VOCAB_TOPIC_DAYS.length;i++){if(d>=VOCAB_TOPIC_DAYS[i][0]&&d<=VOCAB_TOPIC_DAYS[i][1])return VOCAB_TOPICS[i];}return VOCAB_TOPICS[8];}
 function showLoading(m){document.getElementById('loadingMsg').textContent=m;document.getElementById('loadingOverlay').classList.remove('d-none');}
@@ -111,7 +112,7 @@ document.getElementById('topbarTitle').textContent=titles[name]||name;
 if(window.innerWidth<992)closeSidebar();
 if(name==='dashboard')renderDashboard();
 if(name==='today'){planDay=getCurrentDay();renderTodayPlan();}
-if(name==='checklist')renderChecklist();
+if(name==='checklist'){checklistDay=getCurrentDay();renderChecklist();}
 if(name==='progress')renderProgress();
 if(name==='errorlog')renderErrors();
 if(name==='vocab')renderVocab();
@@ -198,10 +199,12 @@ document.getElementById('todayPlanContent').innerHTML=`
 }
 
 // ===== CHECKLIST (derived from DAILY_CHECKLIST_FIXED + today's routine tasks) =====
+function changeChecklistDay(delta){checklistDay=Math.max(1,Math.min(45,checklistDay+delta));renderChecklist();}
 function renderChecklist(){
-const today=new Date().toDateString();const day=getCurrentDay();const plan=PLAN[day-1];
-const key='ielts_check_'+currentUser?.pin+'_'+today;const saved=JSON.parse(localStorage.getItem(key)||'{}');
-document.getElementById('checklistDate').textContent=today+' — Day '+day;
+const day=checklistDay;const dateStr=getDateForDay(day);const plan=PLAN[day-1];
+const key='ielts_check_'+currentUser?.pin+'_'+dateStr;const saved=JSON.parse(localStorage.getItem(key)||'{}');
+const isCur=day===getCurrentDay();
+document.getElementById('checklistDate').textContent=dateStr+' — Day '+day+(isCur?' (Today)':'');
 
 // Combine fixed checklist with today's routine tasks
 const routineTasks=plan.morning.split('. ').filter(t=>t.trim()).map((t,i)=>({id:'mr'+i,label:t.trim()+(t.trim().endsWith('.')?'':'.'),sub:'Morning Routine'}))
@@ -222,19 +225,19 @@ document.getElementById('checklistPct').textContent=pct+'%';document.getElementB
 loadDayScores();
 }
 function toggleCheck(id){
-const today=new Date().toDateString();const key='ielts_check_'+currentUser?.pin+'_'+today;
+const dateStr=getDateForDay(checklistDay);const key='ielts_check_'+currentUser?.pin+'_'+dateStr;
 const saved=JSON.parse(localStorage.getItem(key)||'{}');saved[id]=!saved[id];
 localStorage.setItem(key,JSON.stringify(saved));renderChecklist();updateCheckedStat();
 }
 function loadDayScores(){
-const today=new Date().toDateString();const saved=JSON.parse(localStorage.getItem('ielts_scores_day_'+currentUser?.pin+'_'+today)||'{}');
+const dateStr=getDateForDay(checklistDay);const saved=JSON.parse(localStorage.getItem('ielts_scores_day_'+currentUser?.pin+'_'+dateStr)||'{}');
 ['Listening','Reading','Writing1','Writing2','Speaking'].forEach(s=>{const el=document.getElementById('score'+s);if(el)el.value=saved[s.toLowerCase()]||'';});
 const n=document.getElementById('dayNotes');if(n)n.value=saved.notes||'';
 }
 function saveDayData(){
-const today=new Date().toDateString();
+const dateStr=getDateForDay(checklistDay);
 const data={listening:document.getElementById('scoreListening')?.value,reading:document.getElementById('scoreReading')?.value,writing1:document.getElementById('scoreWriting1')?.value,writing2:document.getElementById('scoreWriting2')?.value,speaking:document.getElementById('scoreSpeaking')?.value,notes:document.getElementById('dayNotes')?.value};
-localStorage.setItem('ielts_scores_day_'+currentUser?.pin+'_'+today,JSON.stringify(data));
+localStorage.setItem('ielts_scores_day_'+currentUser?.pin+'_'+dateStr,JSON.stringify(data));
 const best=JSON.parse(localStorage.getItem('ielts_scores_'+currentUser?.pin)||'{}');
 ['listening','reading','writing1','writing2','speaking'].forEach(k=>{if(data[k])best[k]=data[k];});
 localStorage.setItem('ielts_scores_'+currentUser?.pin,JSON.stringify(best));showToast('Progress saved!');
