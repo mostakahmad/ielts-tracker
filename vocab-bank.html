@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IELTS Master Vocab Bank — 1230 Words</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0a0b14;--card:#12141f;--card2:#1a1d2e;--border:#232640;
+  --accent:#6c63ff;--accent2:#00d9ff;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--pink:#ec4899;
+  --text:#e8eaf6;--text2:#9fa8c9;--text3:#5a6080;
+  --A:#6c63ff;--B:#00d9ff;--C:#22c55e;--D:#f59e0b;--E:#ec4899;--F:#8b5cf6;
+  --G:#06b6d4;--H:#f97316;--I:#10b981;--J:#ef4444;--K:#3b82f6;--L:#a855f7;
+  --M:#14b8a6;--N:#eab308;--O:#f43f5e;--P:#84cc16;--Q:#0ea5e9;--R:#d946ef;--S:#fb923c;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#1a0b3b 0%,#0d1b4b 50%,#001a3a 100%);padding:20px 20px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);}
+.header-top{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:1400px;margin:0 auto;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.brand-title{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#fff,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.brand-sub{font-size:.68rem;color:var(--text3);}
+.stats-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.stat-pill{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:.72rem;display:flex;align-items:center;gap:5px;}
+.stat-pill strong{font-weight:700;}
+.stat-pill.done{border-color:rgba(34,197,94,.3);color:var(--green);}
+.stat-pill.total{border-color:rgba(108,99,255,.3);color:var(--accent);}
+
+/* CONTROLS */
+.controls{max-width:1400px;margin:0 auto;padding:14px 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.search-wrap{flex:1;min-width:200px;position:relative;}
+.search-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.9rem;}
+.search-input{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:9px 12px 9px 36px;color:var(--text);font-size:.82rem;font-family:inherit;outline:none;transition:.2s;}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(108,99,255,.15);}
+.search-input::placeholder{color:var(--text3);}
+.ctrl-btn{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:9px 14px;color:var(--text2);font-size:.78rem;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:.2s;font-family:inherit;}
+.ctrl-btn:hover{border-color:var(--accent);color:var(--text);}
+.ctrl-btn.active{background:rgba(108,99,255,.15);border-color:var(--accent);color:var(--accent);}
+.view-toggle{display:flex;gap:4px;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:3px;}
+.view-btn{padding:5px 10px;border-radius:7px;border:none;background:none;color:var(--text3);cursor:pointer;font-size:.85rem;transition:.2s;}
+.view-btn.active{background:var(--accent);color:#fff;}
+
+/* PROGRESS BAR */
+.progress-bar-wrap{max-width:1400px;margin:0 auto;padding:0 20px 14px;}
+.progress-bar-track{height:6px;background:var(--border);border-radius:10px;overflow:hidden;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:10px;transition:width .5s ease;}
+.progress-label{display:flex;justify-content:space-between;font-size:.68rem;color:var(--text3);margin-bottom:5px;}
+
+/* SECTION TABS */
+.section-tabs{max-width:1400px;margin:0 auto;padding:0 20px 14px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;}
+.section-tabs::-webkit-scrollbar{display:none;}
+.sec-tab{flex-shrink:0;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--card2);color:var(--text2);font-size:.72rem;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.2s;font-family:inherit;}
+.sec-tab:hover{border-color:var(--accent);color:var(--text);}
+.sec-tab.active{color:#fff;border-color:transparent;}
+.sec-tab .tab-count{font-size:.62rem;background:rgba(255,255,255,.1);padding:1px 5px;border-radius:10px;}
+.sec-tab .tab-done{font-size:.62rem;color:var(--green);}
+
+/* MAIN GRID */
+.vocab-grid{max-width:1400px;margin:0 auto;padding:0 20px 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.vocab-grid.list-view{grid-template-columns:1fr;}
+
+/* VOCAB CARD */
+.word-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden;user-select:none;}
+.word-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.4);}
+.word-card.done{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.05);}
+.word-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--sec-color,var(--accent));border-radius:12px 0 0 12px;}
+.word-num{font-size:.62rem;color:var(--text3);font-weight:600;margin-bottom:4px;}
+.word-text{font-size:.9rem;font-weight:700;color:var(--text);line-height:1.3;word-break:break-word;}
+.word-section{font-size:.62rem;color:var(--text3);margin-top:5px;display:flex;align-items:center;gap:4px;}
+.word-done-icon{position:absolute;top:10px;right:10px;width:22px;height:22px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;opacity:0;transition:.2s;}
+.word-card.done .word-done-icon{opacity:1;}
+.word-card.done .word-text{color:var(--text2);}
+
+/* LIST VIEW CARD */
+.vocab-grid.list-view .word-card{display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:10px;}
+.vocab-grid.list-view .word-card::before{border-radius:10px 0 0 10px;}
+.vocab-grid.list-view .word-num{min-width:38px;margin:0;font-size:.7rem;}
+.vocab-grid.list-view .word-text{font-size:.85rem;flex:1;}
+.vocab-grid.list-view .word-section{margin:0;min-width:140px;display:none;}
+.vocab-grid.list-view .word-done-icon{position:static;opacity:1;display:flex;width:20px;height:20px;background:none;color:var(--text3);}
+.vocab-grid.list-view .word-card.done .word-done-icon{color:var(--green);}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text3);}
+.empty-state i{font-size:2.5rem;display:block;margin-bottom:10px;}
+
+/* BULK ACTIONS */
+.bulk-bar{max-width:1400px;margin:0 auto;padding:0 20px 12px;display:flex;gap:8px;flex-wrap:wrap;}
+.bulk-btn{padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--card2);color:var(--text2);font-size:.75rem;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.2s;font-family:inherit;}
+.bulk-btn:hover{border-color:var(--accent);color:var(--text);}
+.bulk-btn.mark-done{border-color:rgba(34,197,94,.4);color:var(--green);}
+.bulk-btn.mark-done:hover{background:rgba(34,197,94,.1);}
+.bulk-btn.danger{border-color:rgba(239,68,68,.3);color:var(--red);}
+.bulk-btn.danger:hover{background:rgba(239,68,68,.08);}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 18px;font-size:.8rem;display:flex;align-items:center;gap:8px;transform:translateY(80px);opacity:0;transition:.3s;z-index:999;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast i{color:var(--green);font-size:1rem;}
+
+/* SECTION BADGE COLORS */
+.badge-A{color:var(--A)}.badge-B{color:var(--B)}.badge-C{color:var(--C)}.badge-D{color:var(--D)}.badge-E{color:var(--E)}.badge-F{color:var(--F)}.badge-G{color:var(--G)}.badge-H{color:var(--H)}.badge-I{color:var(--I)}.badge-J{color:var(--J)}.badge-K{color:var(--K)}.badge-L{color:var(--L)}.badge-M{color:var(--M)}.badge-N{color:var(--N)}.badge-O{color:var(--O)}.badge-P{color:var(--P)}.badge-Q{color:var(--Q)}.badge-R{color:var(--R)}.badge-S{color:var(--S)}
+
+@media(max-width:600px){
+  .vocab-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;}
+  .header-top{flex-wrap:wrap;}
+  .stats-row{gap:5px;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="brand">
+      <div class="brand-icon"><i class="bi bi-alphabet" style="color:#fff"></i></div>
+      <div>
+        <div class="brand-title">IELTS Master Vocab Bank</div>
+        <div class="brand-sub">Band 7+ • 1230 Words • 19 Sections • E2B</div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-pill total"><i class="bi bi-collection"></i> <strong id="statTotal">1230</strong> Total</div>
+      <div class="stat-pill done"><i class="bi bi-check-circle-fill"></i> <strong id="statDone">0</strong> Mastered</div>
+      <div class="stat-pill" style="border-color:rgba(245,158,11,.3);color:var(--amber)"><i class="bi bi-hourglass-split"></i> <strong id="statLeft">1230</strong> Left</div>
+      <div class="stat-pill" style="border-color:rgba(0,217,255,.3);color:var(--accent2)"><i class="bi bi-fire"></i> <strong id="statPct">0%</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-label"><span>Overall Mastery</span><span id="progLabel">0 / 1230</span></div>
+  <div class="progress-bar-track"><div class="progress-bar-fill" id="progBar" style="width:0%"></div></div>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <i class="bi bi-search"></i>
+    <input class="search-input" id="searchInput" type="text" placeholder="Search any word..." autocomplete="off"/>
+  </div>
+  <button class="ctrl-btn" id="filterAllBtn" onclick="setFilter('all',this)"><i class="bi bi-grid"></i> All</button>
+  <button class="ctrl-btn" id="filterDoneBtn" onclick="setFilter('done',this)"><i class="bi bi-check-circle"></i> Mastered</button>
+  <button class="ctrl-btn" id="filterTodoBtn" onclick="setFilter('todo',this)"><i class="bi bi-circle"></i> To Learn</button>
+  <div class="view-toggle">
+    <button class="view-btn active" id="gridViewBtn" onclick="setView('grid',this)" title="Grid view"><i class="bi bi-grid-3x3-gap"></i></button>
+    <button class="view-btn" id="listViewBtn" onclick="setView('list',this)" title="List view"><i class="bi bi-list-ul"></i></button>
+  </div>
+</div>
+
+<div class="bulk-bar">
+  <button class="bulk-btn mark-done" onclick="markSectionDone()"><i class="bi bi-check2-all"></i> Mark Current Section Done</button>
+  <button class="bulk-btn" onclick="markSectionUndone()"><i class="bi bi-arrow-counterclockwise"></i> Unmark Section</button>
+  <button class="bulk-btn danger" onclick="resetAll()"><i class="bi bi-trash3"></i> Reset All Progress</button>
+  <div style="flex:1"></div>
+  <div style="font-size:.72rem;color:var(--text3);display:flex;align-items:center" id="showingCount">Showing 1230 words</div>
+</div>
+
+<div class="section-tabs" id="sectionTabs"></div>
+<div class="vocab-grid" id="vocabGrid"></div>
+
+<div class="toast" id="toast"><i class="bi bi-check-circle-fill"></i> <span id="toastMsg"></span></div>
+
+<script src="vocab_bank.js"></script>
+<script>
+const COLORS = {A:'#6c63ff',B:'#00d9ff',C:'#22c55e',D:'#f59e0b',E:'#ec4899',F:'#8b5cf6',G:'#06b6d4',H:'#f97316',I:'#10b981',J:'#ef4444',K:'#3b82f6',L:'#a855f7',M:'#14b8a6',N:'#eab308',O:'#f43f5e',P:'#84cc16',Q:'#0ea5e9',R:'#d946ef',S:'#fb923c'};
+
+let doneSet = new Set(JSON.parse(localStorage.getItem('vocab_done') || '[]'));
+let currentSection = 'ALL';
+let currentFilter = 'all';
+let currentView = 'grid';
+let searchQ = '';
+
+function save(){localStorage.setItem('vocab_done', JSON.stringify([...doneSet]));}
+function setFilter(f, el){
+  currentFilter = f;
+  document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+function setView(v, el){
+  currentView = v;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('vocabGrid').className = 'vocab-grid' + (v === 'list' ? ' list-view' : '');
+  render();
+}
+function toggleWord(id){
+  if(doneSet.has(id)){doneSet.delete(id);}else{doneSet.add(id);}
+  save(); updateStats(); updateTabs();
+  const card = document.querySelector(`[data-id="${id}"]`);
+  if(card) card.classList.toggle('done', doneSet.has(id));
+}
+function markSectionDone(){
+  const sec = currentSection;
+  const list = sec === 'ALL' ? VOCAB_BANK : VOCAB_BANK.filter(w => w.letter === sec);
+  list.forEach(w => doneSet.add(w.id));
+  save(); updateStats(); updateTabs(); render();
+  toast(`Marked ${list.length} words as mastered!`);
+}
+function markSectionUndone(){
+  const sec = currentSection;
+  const list = sec === 'ALL' ? VOCAB_BANK : VOCAB_BANK.filter(w => w.letter === sec);
+  list.forEach(w => doneSet.delete(w.id));
+  save(); updateStats(); updateTabs(); render();
+  toast(`Unmarked ${list.length} words.`);
+}
+function resetAll(){
+  if(!confirm('Reset ALL progress? This cannot be undone.')) return;
+  doneSet.clear(); save(); updateStats(); updateTabs(); render();
+  toast('All progress reset.');
+}
+function toast(msg){
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+function updateStats(){
+  const done = doneSet.size; const total = VOCAB_BANK.length; const pct = Math.round((done/total)*100);
+  document.getElementById('statDone').textContent = done;
+  document.getElementById('statLeft').textContent = total - done;
+  document.getElementById('statPct').textContent = pct + '%';
+  document.getElementById('progBar').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = done + ' / ' + total;
+}
+function buildSectionTabs(){
+  const el = document.getElementById('sectionTabs');
+  let html = `<button class="sec-tab active" style="border-color:var(--accent);color:var(--accent)" onclick="selectSection('ALL',this)">
+    <i class="bi bi-collection"></i> All <span class="tab-count">${VOCAB_BANK.length}</span>
+  </button>`;
+  VOCAB_SECTIONS.forEach(s => {
+    const c = COLORS[s.letter] || '#fff';
+    const doneInSec = VOCAB_BANK.filter(w=>w.letter===s.letter && doneSet.has(w.id)).length;
+    const pct = Math.round((doneInSec/s.count)*100);
+    html += `<button class="sec-tab" id="tab-${s.letter}" style="--sec-tab-color:${c}" onclick="selectSection('${s.letter}',this)">
+      <span style="color:${c};font-weight:700">${s.letter}</span>
+      <span style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.name.split(',')[0].split('and')[0].trim()}</span>
+      <span class="tab-count">${s.count}</span>
+      ${doneInSec > 0 ? `<span class="tab-done">${pct}%</span>` : ''}
+    </button>`;
+  });
+  el.innerHTML = html;
+}
+function updateTabs(){
+  VOCAB_SECTIONS.forEach(s => {
+    const tab = document.getElementById('tab-'+s.letter);
+    if(!tab) return;
+    const doneInSec = VOCAB_BANK.filter(w=>w.letter===s.letter && doneSet.has(w.id)).length;
+    const pct = Math.round((doneInSec/s.count)*100);
+    const doneSpan = tab.querySelector('.tab-done');
+    if(doneInSec > 0){
+      if(doneSpan) doneSpan.textContent = pct+'%';
+      else tab.innerHTML += `<span class="tab-done">${pct}%</span>`;
+    } else if(doneSpan) doneSpan.remove();
+  });
+}
+function selectSection(letter, el){
+  currentSection = letter;
+  document.querySelectorAll('.sec-tab').forEach(t => {
+    t.classList.remove('active');
+    t.style.borderColor = '';
+    t.style.color = '';
+  });
+  el.classList.add('active');
+  if(letter === 'ALL'){el.style.borderColor='var(--accent)';el.style.color='var(--accent)';}
+  else{const c=COLORS[letter]||'#fff';el.style.borderColor=c;el.style.color=c;}
+  render();
+}
+function render(){
+  let list = VOCAB_BANK;
+  if(currentSection !== 'ALL') list = list.filter(w => w.letter === currentSection);
+  if(searchQ) list = list.filter(w => w.word.toLowerCase().includes(searchQ));
+  if(currentFilter === 'done') list = list.filter(w => doneSet.has(w.id));
+  if(currentFilter === 'todo') list = list.filter(w => !doneSet.has(w.id));
+  
+  document.getElementById('showingCount').textContent = `Showing ${list.length} words`;
+  
+  if(!list.length){
+    document.getElementById('vocabGrid').innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="bi bi-search"></i><p>No words found. Try a different filter.</p></div>';
+    return;
+  }
+  
+  const isList = currentView === 'list';
+  document.getElementById('vocabGrid').innerHTML = list.map(w => {
+    const done = doneSet.has(w.id);
+    const color = COLORS[w.letter] || '#6c63ff';
+    return `<div class="word-card ${done?'done':''}" data-id="${w.id}" onclick="toggleWord(${w.id})" style="--sec-color:${color}">
+      <div class="word-num">#${w.id}</div>
+      <div class="word-text">${w.word}</div>
+      ${!isList ? `<div class="word-section badge-${w.letter}"><i class="bi bi-bookmark-fill" style="font-size:.55rem"></i> ${w.letter}</div>` : ''}
+      <div class="word-done-icon"><i class="bi bi-check-lg"></i></div>
+    </div>`;
+  }).join('');
+}
+
+// Search
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchQ = e.target.value.toLowerCase().trim();
+  render();
+});
+
+// Init
+buildSectionTabs();
+updateStats();
+render();
+</script>
+</body>
+</html>
