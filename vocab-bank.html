@@ -71,6 +71,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .word-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--sec-color,var(--accent));border-radius:12px 0 0 12px;}
 .word-num{font-size:.62rem;color:var(--text3);font-weight:600;margin-bottom:4px;}
 .word-text{font-size:.9rem;font-weight:700;color:var(--text);line-height:1.3;word-break:break-word;}
+.word-bn{font-size:.78rem;color:var(--text2);margin-top:6px;display:none;font-weight:400;border-top:1px solid rgba(255,255,255,.05);padding-top:6px;}
+.word-card.show-meanings .word-bn{display:block;}
 .word-section{font-size:.62rem;color:var(--text3);margin-top:5px;display:flex;align-items:center;gap:4px;}
 .word-done-icon{position:absolute;top:10px;right:10px;width:22px;height:22px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;opacity:0;transition:.2s;}
 .word-card.done .word-done-icon{opacity:1;}
@@ -150,6 +152,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <button class="view-btn active" id="gridViewBtn" onclick="setView('grid',this)" title="Grid view"><i class="bi bi-grid-3x3-gap"></i></button>
     <button class="view-btn" id="listViewBtn" onclick="setView('list',this)" title="List view"><i class="bi bi-list-ul"></i></button>
   </div>
+  <button class="ctrl-btn" onclick="toggleAllMeanings()"><i class="bi bi-translate"></i> <span id="bnToggleLabel">Show Bangla</span></button>
 </div>
 
 <div class="bulk-bar">
@@ -174,8 +177,14 @@ let currentSection = 'ALL';
 let currentFilter = 'all';
 let currentView = 'grid';
 let searchQ = '';
+let showMeanings = false;
 
 function save(){localStorage.setItem('vocab_done', JSON.stringify([...doneSet]));}
+function toggleAllMeanings(){
+  showMeanings = !showMeanings;
+  document.getElementById('bnToggleLabel').textContent = showMeanings ? 'Hide Bangla' : 'Show Bangla';
+  document.querySelectorAll('.word-card').forEach(c => c.classList.toggle('show-meanings', showMeanings));
+}
 function setFilter(f, el){
   currentFilter = f;
   document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
@@ -289,9 +298,10 @@ function render(){
   document.getElementById('vocabGrid').innerHTML = list.map(w => {
     const done = doneSet.has(w.id);
     const color = COLORS[w.letter] || '#6c63ff';
-    return `<div class="word-card ${done?'done':''}" data-id="${w.id}" onclick="toggleWord(${w.id})" style="--sec-color:${color}">
+    return `<div class="word-card ${done?'done':''} ${showMeanings?'show-meanings':''}" data-id="${w.id}" onclick="toggleWord(${w.id})" style="--sec-color:${color}">
       <div class="word-num">#${w.id}</div>
       <div class="word-text">${w.word}</div>
+      <div class="word-bn">${w.bn || ''}</div>
       ${!isList ? `<div class="word-section badge-${w.letter}"><i class="bi bi-bookmark-fill" style="font-size:.55rem"></i> ${w.letter}</div>` : ''}
       <div class="word-done-icon"><i class="bi bi-check-lg"></i></div>
     </div>`;

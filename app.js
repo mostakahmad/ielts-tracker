@@ -1,4 +1,4 @@
-﻿// ===== STATE =====
+// ===== STATE =====
 let currentUser=null,db=null,planDay=1,currentResTab='free',currentWeek=1,errorEntries=[],vocabEntries=[];
 try{firebase.initializeApp(firebaseConfig);db=firebase.firestore();}catch(e){}
 
@@ -241,7 +241,7 @@ function renderVocab(){
   if(!list.length){el.innerHTML='<div class="empty-state"><i class="bi bi-alphabet" style="font-size:2rem;color:var(--text3)"></i><p>No words yet. Add 15 words today! Topic: <strong>'+topic+'</strong></p></div>';return;}
   el.innerHTML=list.map((v,i)=>`<div class="vocab-item">
     <div style="display:flex;justify-content:space-between;align-items:flex-start">
-      <div style="flex:1"><div class="vocab-word">${v.word}</div><div class="vocab-meaning">${v.meaning}</div>${v.collocation?`<div style="font-size:.72rem;color:#06b6d4">Collocation: ${v.collocation}</div>`:''} ${v.example?`<div style="font-size:.72rem;color:var(--text3);font-style:italic">"${v.example}"</div>`:''} <span style="font-size:.68rem;color:var(--accent);background:rgba(99,102,241,.1);padding:1px 7px;border-radius:20px">${v.topic}</span></div>
+      <div style="flex:1"><div class="vocab-word">${v.word}</div><div class="vocab-meaning">${v.meaning}</div>${v.meaningBn?`<div class="vocab-meaning-bn">${v.meaningBn}</div>`:''}${v.collocation?`<div style="font-size:.72rem;color:#06b6d4">Collocation: ${v.collocation}</div>`:''} ${v.example?`<div style="font-size:.72rem;color:var(--text3);font-style:italic">"${v.example}"</div>`:''} <span style="font-size:.68rem;color:var(--accent);background:rgba(99,102,241,.1);padding:1px 7px;border-radius:20px">${v.topic}</span></div>
       <button onclick="deleteVocab(${i})" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="bi bi-trash3"></i></button>
     </div>
   </div>`).join('');
@@ -249,11 +249,11 @@ function renderVocab(){
 function openVocabModal(){document.getElementById('vocabModal').classList.remove('d-none');document.getElementById('vocabTopicInput').value=getCurrentTopic();}
 function closeVocabModal(){document.getElementById('vocabModal').classList.add('d-none');}
 function saveVocab(){
-  const entry={word:document.getElementById('vocabWord').value.trim(),meaning:document.getElementById('vocabMeaning').value.trim(),collocation:document.getElementById('vocabCollocation').value.trim(),example:document.getElementById('vocabExample').value.trim(),topic:document.getElementById('vocabTopicInput').value.trim()||getCurrentTopic(),date:new Date().toLocaleDateString()};
-  if(!entry.word||!entry.meaning){showToast('Enter word and meaning.');return;}
+  const entry={word:document.getElementById('vocabWord').value.trim(),meaning:document.getElementById('vocabMeaning').value.trim(),meaningBn:document.getElementById('vocabMeaningBn').value.trim(),collocation:document.getElementById('vocabCollocation').value.trim(),example:document.getElementById('vocabExample').value.trim(),topic:document.getElementById('vocabTopicInput').value.trim()||getCurrentTopic(),date:new Date().toLocaleDateString()};
+  if(!entry.word||(!entry.meaning && !entry.meaningBn)){showToast('Enter word and at least one meaning.');return;}
   loadVocab();vocabEntries.unshift(entry);localStorage.setItem('ielts_vocab_'+currentUser.pin,JSON.stringify(vocabEntries));
   closeVocabModal();renderVocab();showToast('Word added!');
-  ['vocabWord','vocabMeaning','vocabCollocation','vocabExample'].forEach(id=>document.getElementById(id).value='');
+  ['vocabWord','vocabMeaning','vocabMeaningBn','vocabCollocation','vocabExample'].forEach(id=>document.getElementById(id).value='');
 }
 function deleteVocab(i){loadVocab();vocabEntries.splice(i,1);localStorage.setItem('ielts_vocab_'+currentUser.pin,JSON.stringify(vocabEntries));renderVocab();}
 
